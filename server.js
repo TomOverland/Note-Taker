@@ -45,6 +45,18 @@ app.post("./api/notes", async (req, res) => {
     res.json(notes[notes.length -1]);
 });
 
+app.delete('/api/notes/:id', async (req, res) => {
+    const id = req.params.id;
+
+    let notes = await readFileAsync("./db/db.json", "utf8");
+    notes = JSON.parse(notes);
+
+    notes = notes.filter((note) => note.id !== id);
+
+    await writeFileAsync("./db/db.json", JSON.stringify(notes));
+    res.json(notes);
+});
+
 app.listen(PORT, () => {
     console.log(`Server is now listening at http://localhost:${PORT}`)
 })
