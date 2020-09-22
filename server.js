@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const util = require('util');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
@@ -28,3 +29,14 @@ app.get('/api/notes', (req, res) => {
     })
     .catch((err) => console.log(err));
 })
+
+// POST the request into a notes object
+app.post("./api/notes", async (req, res) => { 
+    let notes = await readFileAsync('./db/db.json', 'utf8');
+    notes = JSON.parse(notes);
+    req.body.id = uuidv4();
+    notes.push(req.body);
+
+    await writeFileAsync('./db/db.json', JSON.stringify(notes));
+    res.json(notes[notes.length -1]);
+});
