@@ -40,3 +40,7 @@ app.post("./api/notes", async (req, res) => {
     await writeFileAsync('./db/db.json', JSON.stringify(notes));
     res.json(notes[notes.length -1]);
 });
+
+app.listen(PORT, () => {
+    console.log(`Server is now listening at http://localhost:${PORT}`)
+})
