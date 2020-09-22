@@ -35,7 +35,7 @@ app.get('/api/notes', (req, res) => {
 })
 
 // POST the request into a notes object
-app.post("./api/notes", async (req, res) => { 
+app.post("/api/notes", async (req, res) => { 
     let notes = await readFileAsync('./db/db.json', 'utf8');
     notes = JSON.parse(notes);
     req.body.id = uuidv4();
