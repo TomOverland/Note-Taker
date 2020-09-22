@@ -18,3 +18,13 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+// Load notes page on GET request
+app.get('/api/notes', (req, res) => {
+    readFileAsync('./db/db.json', 'utf8')
+    .then((data) => {
+        const notes = JSON.parse(data);
+        res.json(notes);
+    })
+    .catch((err) => console.log(err));
+})
