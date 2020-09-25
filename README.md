@@ -8,16 +8,6 @@
 
 This application can write, save, and delete notes using an express backend to save and retrieve note data from a JSON file.
 
-# Table of Contents
-
-- [Description](#description)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Test](#tests)
-- [License](#license)
-- [Questions](#questions)
-
 ## License:
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
