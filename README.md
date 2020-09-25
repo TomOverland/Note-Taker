@@ -2,8 +2,8 @@
 
 [Deployed on Heroku](https://aqueous-spire-77025.herokuapp.com/).
 
-![Screenshot of Application](public\assets\images\Front_Page.JPG)  
-![Screenshot of Application](public\assets\images\Note_Taker.JPG)
+![Screenshot of Application](./public\assets\images\Front_Page.JPG)  
+![Screenshot of Application](./public\assets\images\Note_Taker.JPG)
 
 ## Description:
 
