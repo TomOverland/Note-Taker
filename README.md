@@ -2,7 +2,6 @@
 
 [Deployed on Heroku](https://aqueous-spire-77025.herokuapp.com/).
 
-![Screenshot of Application](https://github.com/TomOverland/Note-Taker/blob/master/public/assets/images/Front_Page.JPG)  
 ![Screenshot of Application](https://github.com/TomOverland/Note-Taker/blob/master/public/assets/images/Note_Taker.JPG)
 
 ## Description:
