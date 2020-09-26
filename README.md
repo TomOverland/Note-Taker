@@ -1,4 +1,4 @@
-# Team-Profile-Generator
+# Note Taker
 
 [Deployed on Heroku](https://aqueous-spire-77025.herokuapp.com/).
 
