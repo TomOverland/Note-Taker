@@ -5,32 +5,34 @@ const util = require("util");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-// Asynchronous processes
+// Async Processes
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
 // Setting up Express server
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 // Static Middleware
 app.use(express.static("public"));
 
-
-// Load pages on GET requests
+// Load HTML on GET requests
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+//   Couldn't get "*" route to work as requested, found that "/" worked instead
+//   app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
 
 app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/notes.html"));
+  res.sendFile(path.join(__dirname, "public", "notes.html"));
 });
 
-// Load notes page on GET request
+// Load API Routes on GET request
 app.get("/api/notes", (req, res) => {
   readFile("./db/db.json", "utf8")
     .then((data) => {
@@ -39,10 +41,6 @@ app.get("/api/notes", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
-})
 
 // POST the request into a notes object
 app.post("/api/notes", async (req, res) => {
@@ -62,9 +60,9 @@ app.delete("/api/notes/:id", async (req, res) => {
 
   let notes = await readFile("./db/db.json", "utf8");
   notes = JSON.parse(notes);
-
+  // Filter through the notes array, removing the note with the ID that matches the deleted item
   notes = notes.filter((note) => note.id !== id);
-
+  // write the notes array into the db.json file
   await writeFile("./db/db.json", JSON.stringify(notes));
   res.json(notes);
 });
