@@ -5,26 +5,29 @@ const util = require("util");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-// Global Variables
-const app = express();
-
-const PORT = process.env.PORT || 3000;
-
+// Asynchronous processes
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-// Middleware
-app.use(express.static("public"));
+// Setting up Express server
+const app = express();
+const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
+// Static Middleware
+app.use(express.static("public"));
+
+
 // Load pages on GET requests
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 // Load notes page on GET request
@@ -36,6 +39,10 @@ app.get("/api/notes", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+})
 
 // POST the request into a notes object
 app.post("/api/notes", async (req, res) => {
